@@ -8,8 +8,7 @@ const Index = {
       contributor: '',
       etherscanUrl: '',
       digest: '',
-      version: '',
-      fakeTime: '',
+      editDate: '',
     });
 
     const urlObj = new URL(location.href);
@@ -19,10 +18,9 @@ const Index = {
       try {
         const res = await fetch(`https://arweave.net/${postId}`);
         const data = await res.json();
-        console.log(data);
 
         // 正文
-        const { title, body } = data.content;
+        const { title, body, timestamp } = data.content;
         document.title = title || 'Fake Mirror';
         state.title = title;
         const mdHTML = marked.parse(body);
@@ -34,10 +32,9 @@ const Index = {
         state.etherscanUrl = 'https://etherscan.io/address/' + state.contributor;
 
         // 时间处理
-        state.version = dayjs(data.version.replace('-', '/')).format('MMM DD[th], YYYY');
-        state.fakeTime = dayjs(data.content.timestamp * 1000).format('MMM DD[th], YYYY');
+        state.editDate = dayjs(timestamp * 1000).format('MMM DD[th], YYYY');
       } catch (err) {
-        window.location.href = '/404.html';
+        window.location.href = '/404';
       }
     });
 

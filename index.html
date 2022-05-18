@@ -12,6 +12,7 @@
     <!-- 导入第三方模块 -->
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   </head>
   <body>
     <noscript>
@@ -36,7 +37,7 @@
           <h1 class="title">{{ title || 'Untitled' }}</h1>
           <div class="tags">
             <a v-if="contributor" :href="etherscanUrl || '#'">{{ contributor.slice(0, 6) }}</a>
-            <a v-if="version">{{ version }}</a>
+            <a v-if="editDate">{{ editDate }}</a>
           </div>
           <main v-html="body"></main>
         </article>
@@ -61,15 +62,10 @@
             <span>CONTENT DIGEST</span>
             <span>{{ digest || '-' }}</span>
           </div>
-          <div class="post-info-item">
-            <span>FAKE TIME</span>
-            <span>{{ fakeTime || '-' }}</span>
-          </div>
         </footer>
       </div>
     </div>
 
-    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="./js/index.js"></script>
   </body>
 </html>
