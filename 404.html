@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.ico" />
+    <title>Fake Mirror</title>
+    <link rel="stylesheet" href="css/404.css" />
+  </head>
+  <body>
+    <div id="svgContainer"></div>
+
+    <script src="js/lib/bodymovin.js"></script>
+    <script src="js/lib/animationData.js"></script>
+    <script>
+      const svgContainer = document.getElementById('svgContainer');
+      const animItem = bodymovin.loadAnimation({
+        wrapper: svgContainer,
+        animType: 'svg',
+        loop: true,
+        animationData: JSON.parse(animationData),
+      });
+    </script>
+  </body>
+</html>
