@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
+    <base target="_blank" />
+    <title>Fake Mirror</title>
+
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- 导入第三方模块 -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but Fake Mirror doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
+    </noscript>
+
+    <div id="app">
+      <div v-if="!body" class="loading-container">
+        <div class="loading">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div v-else class="post">
+        <article>
+          <h1 class="title">{{ title || 'Untitled' }}</h1>
+          <div class="tags">
+            <a v-if="contributor" :href="etherscanUrl || '#'">{{ contributor.slice(0, 6) }}</a>
+            <a v-if="version">{{ version }}</a>
+          </div>
+          <main v-html="body"></main>
+        </article>
+
+        <footer class="post-info">
+          <a
+            class="post-info-item"
+            :href="
+          contributor && digest
+            ? 'https://mirror.xyz/' + contributor + '/' + digest
+            : '#'
+        "
+          >
+            <span>OFFICIAL SITE ↗</span>
+            <span>https://mirror.xyz/</span>
+          </a>
+          <a class="post-info-item" :href="etherscanUrl || '#'">
+            <span>ETHEREUM ADDRESS ↗</span>
+            <span>{{ contributor || '-' }}</span>
+          </a>
+          <div class="post-info-item">
+            <span>CONTENT DIGEST</span>
+            <span>{{ digest || '-' }}</span>
+          </div>
+          <div class="post-info-item">
+            <span>FAKE TIME</span>
+            <span>{{ fakeTime || '-' }}</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
