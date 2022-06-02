@@ -1,7 +1,15 @@
+const urlObj = new URL(location.href);
+const postIdFromQuery = urlObj.searchParams.get('id');
+const postIdFromParam = urlObj.pathname.slice(1);
+const postId = postIdFromQuery || postIdFromParam;
+
+if (!postId || postId === '404') {
+  window.location.href = '/error.html';
+}
+
 const Index = {
   setup() {
     const { onMounted, reactive, toRefs } = Vue;
-
     const state = reactive({
       title: '',
       body: '',
@@ -10,9 +18,6 @@ const Index = {
       digest: '',
       editDate: '',
     });
-
-    const urlObj = new URL(location.href);
-    const postId = urlObj.searchParams.get('id');
 
     onMounted(async () => {
       try {
@@ -34,7 +39,7 @@ const Index = {
         // 时间处理
         state.editDate = dayjs(timestamp * 1000).format('MMM DD[th], YYYY');
       } catch (err) {
-        window.location.href = '/404';
+        window.location.href = '/error.html';
       }
     });
 
